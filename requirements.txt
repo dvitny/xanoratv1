@@ -1,0 +1,11 @@
+discord.py
+Pillow
+pyttsx3
+opencv-python
+browserhistory
+pynput
+pycaw
+comtypes
+pywin32
+sounddevice
+scipy
