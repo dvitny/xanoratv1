@@ -96,20 +96,6 @@ The source additionally defines functions for Startup-folder persistence using a
 | Persistence mechanisms | Windows Task Scheduler / Startup-folder code |
 | Privilege escalation attempts | UAC elevation / fodhelper technique |
 
-## Important Analysis Findings
-
-Static analysis revealed several limitations and potentially unreliable behaviors.
-
-1. **Keylogger shutdown:** The stop command changes a thread attribute, but the keyboard listener does not check that attribute. Therefore, monitoring may continue.
-2. **Screen recording:** The feature sends individual screenshots rather than generating a video file. The loop also lacks a one-second delay.
-3. **Microphone recording:** The configured duration is 180 seconds, although the built-in help message describes two minutes.
-4. **BSOD command:** The implementation invokes a shutdown command and does not directly trigger a Windows bug check.
-5. **Persistence:** Scheduled-task creation may be unreliable because of path, permission, and elevation requirements.
-6. **Startup behavior:** Startup-folder persistence functions exist in the source, but no invocation of those functions was identified.
-7. **UAC bypass:** The presence of a bypass routine does not establish that it works on supported Windows versions.
-8. **Access control:** The bot filters messages by channel and ignores bot authors, but does not implement an explicit authorized-user allowlist.
-
-These observations are based on source-code analysis, not verified execution in a sandbox.
 
 ## Security Risks
 
@@ -126,14 +112,6 @@ The RAT presents several significant security concerns:
 - Potential exfiltration of sensitive information through Discord.
 
 Because of these capabilities, the sample should be considered **high-risk** when executed outside a controlled research environment.
-
-## Research Scope
-
-This documentation is based on static analysis of the provided Python source code.
-
-It describes the commands and behaviors present in the implementation. It does not guarantee that every feature is operational, compatible with current Windows versions, or capable of evading endpoint protection.
-
-Dynamic analysis, network traffic inspection, persistence verification, and detection engineering would be necessary to validate its behavior further.
 
 ## Intended Use
 
